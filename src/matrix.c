@@ -3,7 +3,6 @@
 #include <math.h>
 #include <assert.h>
 #include "matrix.h"
-#include "vector.h"
 
 matrix_t make_matrix(unsigned r, unsigned c)
 {
