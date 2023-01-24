@@ -1,24 +1,43 @@
+/** @file vector.h
+ *  @brief A small vector library
+ *
+ * This library provide a few functions for the computation with vectors.
+ */
+
 #ifndef VECTOR_H
 #define VECTOR_H
 
+/** @brief Definition of vector_t type  */ 
 typedef struct
 {
     unsigned size;
     double *values;
 } vector_t;
 
-vector_t make_vector(unsigned);
+/** @brief Vector factory
+ *
+ * This function builds a null vector of size s;
+ * the array is dynamically allocated and must be freed with the function
+ * free_vector
+ * @param s: the size of the vector must be >0
+ * @return a vector of size s initialized to 0
+ * @see free_vector
+ */
 
-double v_get(vector_t, unsigned);
+vector_t make_vector(unsigned s);
 
-void v_set(vector_t, unsigned, double);
+void free_vector(vector_t v);
 
-void v_print_h(vector_t);
+double v_get(vector_t v, unsigned i);
 
-void v_print(vector_t);
+void v_set(vector_t v, unsigned i, double x);
 
-double scalar_product(vector_t, vector_t);
+void v_add(vector_t v, unsigned i, double x);
 
-void v_free(vector_t);
+double scalar_prod(vector_t v1, vector_t v2);
+
+void v_print_h(vector_t v);
+
+void v_print(vector_t v);
 
 #endif
