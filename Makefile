@@ -12,7 +12,7 @@ prog: lib/libmat.so
 
 bin/%.o: src/%.c
 	@echo "[1] Compiling $<..."
-	@$(CC) $(CFLAGS) -c -o $@ $< -fPIC
+	@$(CC) $(CFLAGS) -c -o $@ $< -fPIC -ggdb -O0
 
 lib/libmat.so: $(OBJECTS)
 	@echo "[2] Linking..."
