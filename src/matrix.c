@@ -88,3 +88,12 @@ void free_matrix(matrix_t m)
 {
     free(m.values);
 }
+
+matrix_t make_identity_matrix(unsigned n) {
+  matrix_t id = make_matrix(n,n);
+  unsigned i,j;
+  for(i=0; i<n; i++)
+    for(j=0; j<n; j++)
+      m_set(id, i, j, i==j);
+  return id;
+}
