@@ -1,20 +1,14 @@
-CC = gcc
-CFLAGS = -Iinclude
+CFLAGS = -g -O0
 
-SOURCES=$(wildcard *.c)
-OBJECTS=$(SOURCES: %.c=%.o)
+prog : dho xtrem space cafard geek hack
 
-all: prog
+% : bin/%.o
+	$(CC) -o $@ $^
 
-prog: $(OBJECTS)
-	@$(CC) $(CFLAGS) -o $@ $^
+bin/%.o : src/%.c
+	$(CC) -o $@ $(CFLAGS) -c $<
 
-bin/%.o: src/%.c
-	@echo "[1] Compiling $<..."
-	@$(CC) $(CFLAGS) -c -o $@ $< -fPIC -ggdb -O0
-	
-clean:
-	@echo "Cleaning up..."
-	@rm -f bin/*.o prog lib/*.so
+clean :
+	rm dho xtrem space cafard geek hack
 
-.PHONY: clean all
+.PHONY : clean

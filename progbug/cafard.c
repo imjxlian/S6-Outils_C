@@ -5,11 +5,17 @@ int strcmp_rec(char *s,char *t){
   if ((s[0]=='\0') && (t[0]=='\0'))
     return 0;
   if (s[0]<t[0]) return -1;
+  /*
   else {
     if (strcmp_rec(s+1,t+1)==0)
       return 0;
     return 1;
   }
+  */
+  /* debut correction */
+  if (s[0]>t[0]) return 1;
+  return strcmp_rec(s+1,t+1);
+  /* fin correction */
 }
 
 int main(int argc, char **argv){
@@ -22,7 +28,8 @@ int main(int argc, char **argv){
     case 1:
       puts("greater");
       break;
-    case 2:
+      /* case 2: */
+    case -1: /* correction */
       puts("smaller");
       break;
     }

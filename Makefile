@@ -20,10 +20,11 @@ lib/libmat.so: $(OBJECTS)
 
 doc: $(SOURCES)
 	@echo "[4] Generating documentation..."
+	@rm -rf doc/html/* doc/latex/*
 	@cd doc && doxygen Doxyfile
 
 clean:
 	@echo "Cleaning up..."
-	@rm -f bin/*.o prog lib/*.so
+	@rm -rf bin/*.o prog lib/*.so doc/html/* doc/latex/*
 
 .PHONY: clean all doc

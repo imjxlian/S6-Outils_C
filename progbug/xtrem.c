@@ -9,11 +9,13 @@ void randstack(int i){
 
 
 int printArray(int *value){
-  int i;
+  /* int i; */
+  int i=0;  /* correction */
   while(value[i]!=-1){
     printf("%d ",value[i]);
     i+=1;
   }
+  return 0; /* correction */
 }
 
 int main(){

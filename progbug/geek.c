@@ -10,20 +10,26 @@ struct Cell *newCell(int value){
   struct Cell *p=malloc(sizeof p);
   if (p==NULL) exit(2);
   p->value=value;
+  p->next = NULL; /* correction */
   return p;
 }
 
-void sortInsert(struct Cell **head, struct Cell *cell){
+/* void sortInsert(struct Cell **head, struct Cell *cell){ */
+struct Cell *sortInsert(struct Cell **head, struct Cell *cell){ /* correction */
   if (*head==NULL){
     *head=cell;
-    return;
+    /* return; */
+    return cell; /* correction */
   }
   if ((*head)->value>=cell->value){
     cell->next = *head;
     *head = cell;
-    return;
+    /* return; */
+    return cell; /* correction */
   }
-  sortInsert(&((*head)->next),cell);
+  /* sortInsert(&((*head)->next),cell); */ 
+  (*head)->next = sortInsert(&((*head)->next),cell); /* correction */
+  return *head; /* correction */
 }
 
 void power2(struct Cell *list){
@@ -34,20 +40,23 @@ void power2(struct Cell *list){
 
 void freeList(struct Cell *list){
   if(list==NULL) return;
-  free(list);
+  /*free(list);*/
   freeList(list->next);
+  free(list); /* correction */
 }
 
 void printList(struct Cell *list){
   if(list==NULL) printf("\n");
   else {
     printf("%d ",list->value);
-    printList(list);
+    /* printList(list); */
+    printList(list->next); /* correction */
   } 
 }
 
 int main(int argc, char **argv){
-  struct Cell *list;
+  /* struct Cell *list; */
+  struct Cell *list = NULL; /* correction */
   int i,j;
   for( j=0;j<5;++j){    
     for(i=0;i<5;++i)
@@ -56,6 +65,7 @@ int main(int argc, char **argv){
     power2(list);
     printList(list);
     freeList(list);
+    list=NULL; /* correction */
   }
   return EXIT_SUCCESS;
 }

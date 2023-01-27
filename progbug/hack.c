@@ -17,6 +17,8 @@ struct Cell *newCell(int value){
   struct Cell *p=malloc(sizeof *p);
   if (p==NULL) exit(2);
   p->value = value;
+  p->next = NULL; /* correction */
+  p->prev = NULL; /* correction */
   return p;
 }
 
@@ -32,13 +34,25 @@ struct Cell * append(struct Cell *list, struct Cell *newCell){
 
 struct Cell *removeValue(struct Cell *list , int value){
   struct Cell *tmp;
+  struct Cell *tmp2; /* correction*/
   if (list==NULL) return NULL;
   if (list->value==value) {
     tmp=list->next;
+    /* debut correction */
+    tmp2=list->prev;
+    if(tmp!=NULL)
+      tmp->prev = tmp2;
+    if(tmp2!=NULL)
+      tmp2->next = tmp;
+    /* fin correction */
     free(list);
     return removeValue(tmp,value);
   }
   list->next  = removeValue(list->next,value);
+  /* debut correction */
+  if(list->next != NULL)
+    list->next->prev = list;
+  /* fin correction */
   return list;
 }
 
