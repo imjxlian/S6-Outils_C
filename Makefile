@@ -12,10 +12,12 @@ prog: lib/libmat.so
 
 bin/%.o: src/%.c
 	@echo "[1] Compiling $<..."
+	@mkdir -p bin
 	@$(CC) $(CFLAGS) -c -o $@ $< -fPIC -ggdb -O0
 
 lib/libmat.so: $(OBJECTS)
 	@echo "[2] Linking..."
+	@mkdir -p lib
 	@$(CC) -shared -o $@ $^
 
 doc: $(SOURCES)
